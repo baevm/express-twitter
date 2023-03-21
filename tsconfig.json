@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "target": "ES2017",
+        "noImplicitAny": false,
+        "strictNullChecks": true,
+        "sourceMap": true,
+        "removeComments": true,
+        "esModuleInterop": true,
+        "strictBindCallApply": false,
+        "outDir": "./dist",
+        "baseUrl": "./",
+    
+    },
+    "ts-node": {
+        "swc": true
+    },
+
+    "exclude": ["node_modules", "dist"]
+}

@@ -11,7 +11,6 @@ exports.app = app;
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.get('/health', (req, res) => {
-    console.log(req);
     res.send('OK');
 });
 //# sourceMappingURL=express.js.map

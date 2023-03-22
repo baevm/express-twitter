@@ -10,6 +10,4 @@ app.get('/health', (req, res) => {
   res.send('OK')
 })
 
-let test = ''
-
 export { app }

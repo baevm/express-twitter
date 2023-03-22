@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String  @id @default(uuid())
+  username    String  @unique
+  password    String
+  avatar      String?
+  tweetsCount Int
+
+  tweets    Tweet[]
+  likes     TweetLike[]
+  followers Follower[]  @relation("follower")
+  following Follower[]  @relation("following")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tweet {
+  id            String  @id @default(uuid())
+  userId        String
+  text          String
+  mediaId       String
+  type          String
+  tweetParentId String?
+  isDeleted     Boolean
+  likesCount    Int     @default(0)
+  repliesCount  Int     @default(0)
+
+  likes       TweetLike[]
+  replies     Tweet[]      @relation("replies")
+  media       TweetMedia[]
+  user        User         @relation(fields: [userId], references: [id])
+  tweetParent Tweet?       @relation("replies", fields: [tweetParentId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TweetMedia {
+  id      String @id @default(uuid())
+  url     String
+  tweetId String
+  Tweet   Tweet  @relation(fields: [tweetId], references: [id])
+}
+
+model TweetLike {
+  id      String @id @default(uuid())
+  tweetId String
+  userId  String
+  Tweet   Tweet  @relation(fields: [tweetId], references: [id])
+  User    User   @relation(fields: [userId], references: [id])
+}
+
+model Follower {
+  id         String @id @default(uuid())
+  followerId String
+  followeeId String
+
+  Follower User @relation("follower", fields: [followerId], references: [id])
+  Followee User @relation("following", fields: [followeeId], references: [id])
+}

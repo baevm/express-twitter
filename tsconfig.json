@@ -9,7 +9,12 @@
         "esModuleInterop": true,
         "strictBindCallApply": false,
         "outDir": "./dist",
-        "baseUrl": "./",
+        "baseUrl": "./src",
+
+        "paths": {
+            "@api/*": ["api/*"],
+            "@config/*": ["config/*"],
+        }
     
     },
     "ts-node": {

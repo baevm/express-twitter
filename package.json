@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node dist/index.js",
-    "start:dev": "nodemon --exec \"ts-node\" ./src/index.ts",
+    "start:dev": "nodemon --exec \"ts-node\" -r tsconfig-paths/register src/index.ts",
     "build": "tsc -p .",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\""
   },
@@ -32,6 +32,7 @@
     "prisma": "^4.11.0",
     "regenerator-runtime": "^0.13.11",
     "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.2",
     "typescript": "^5.0.2"
   },
   "rootDir": "src"

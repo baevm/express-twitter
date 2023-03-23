@@ -1,16 +1,16 @@
 import { Router } from 'express'
-import TweetController from './tweet.controller'
+import TweetService from './tweet.service'
 
 const tweetRouter = Router()
 
-tweetRouter.post('/postTweet', TweetController.postTweet)
+tweetRouter.post('/postTweet', TweetService.postTweet)
 
-tweetRouter.get('/getTweet', TweetController.getTweet)
+tweetRouter.get('/getTweet', TweetService.getTweet)
 
-tweetRouter.post('/deleteTweet', TweetController.deleteTweet)
+tweetRouter.post('/deleteTweet', TweetService.deleteTweet)
 
-tweetRouter.post('/like', TweetController.like)
+tweetRouter.post('/like', TweetService.like)
 
-tweetRouter.post('/unlike', TweetController.unlike)
+tweetRouter.post('/unlike', TweetService.unlike)
 
 export { tweetRouter }

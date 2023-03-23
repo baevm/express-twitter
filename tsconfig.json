@@ -10,6 +10,7 @@
         "strictBindCallApply": false,
         "outDir": "./dist",
         "baseUrl": "./src",
+        "experimentalDecorators": true,
 
         "paths": {
             "@api/*": ["api/*"],

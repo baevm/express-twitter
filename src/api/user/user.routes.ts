@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import UserController from './user.controller'
+import UserService from './user.service'
 
 const userRouter = Router()
 
-userRouter.get('/userInfo', UserController.getUserInfo)
+userRouter.get('/userInfo', UserService.getUserInfo)
 
 export { userRouter }

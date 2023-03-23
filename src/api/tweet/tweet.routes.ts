@@ -1,25 +1,16 @@
 import { Router } from 'express'
+import TweetController from './tweet.controller'
 
 const tweetRouter = Router()
 
-tweetRouter.post('/postTweet', (req, res) => {
-  res.send('Not implemented')
-})
+tweetRouter.post('/postTweet', TweetController.postTweet)
 
-tweetRouter.get('/getTweet', (req, res) => {
-  res.send('Not implemented')
-})
+tweetRouter.get('/getTweet', TweetController.getTweet)
 
-tweetRouter.post('/deleteTweet', (req, res) => {
-  res.send('Not implemented')
-})
+tweetRouter.post('/deleteTweet', TweetController.deleteTweet)
 
-tweetRouter.post('/like', (req, res) => {
-  res.send('Not implemented')
-})
+tweetRouter.post('/like', TweetController.like)
 
-tweetRouter.post('/unlike', (req, res) => {
-  res.send('Not implemented')
-})
+tweetRouter.post('/unlike', TweetController.unlike)
 
 export { tweetRouter }

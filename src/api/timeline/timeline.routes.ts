@@ -1,13 +1,10 @@
 import { Router } from 'express'
+import TimelineController from './timeline.controller'
 
 const timelineRouter = Router()
 
-timelineRouter.get('/getHomeTimeline', (req, res) => {
-  res.send('Not implemented')
-})
+timelineRouter.get('/getHomeTimeline', TimelineController.getHomeTimeline)
 
-timelineRouter.get('/getUserTimeline', (req, res) => {
-  res.send('Not implemented')
-})
+timelineRouter.get('/getUserTimeline', TimelineController.getUserTimeline)
 
 export { timelineRouter }

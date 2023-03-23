@@ -1,13 +1,10 @@
 import { Router } from 'express'
+import FollowController from './follow.controller'
 
 const followRouter = Router()
 
-followRouter.post('/follow', (req, res) => {
-  res.send('Not implemented')
-})
+followRouter.post('/follow', FollowController.follow)
 
-followRouter.post('/unfollow', (req, res) => {
-  res.send('Not implemented')
-})
+followRouter.post('/unfollow', FollowController.unfollow)
 
 export { followRouter }

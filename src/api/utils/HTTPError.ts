@@ -4,14 +4,13 @@ type Status = (typeof HttpStatus)[keyof typeof HttpStatus]
 
 export interface ErrorModel {
   status: Status
-  message: string
+  message: any
 }
 
 export class HttpError extends Error {
   status: Status
-  constructor(status: Status, message: string) {
+  constructor(status: Status, message: any) {
     super(message)
-    Error.captureStackTrace(this, this.constructor)
     this.status = status
   }
 }

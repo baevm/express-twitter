@@ -1,8 +1,11 @@
 import prisma from '@api/prisma/prisma.service'
-import { Request, Response } from 'express'
 
-const getUserInfo = (req: Request, res: Response) => {
-  return 'not implemented'
+const getUserInfo = async (username: string) => {
+  return prisma.user.findUnique({
+    where: {
+      username,
+    },
+  })
 }
 
 const findUserByUsername = (username: string) => {

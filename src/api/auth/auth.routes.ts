@@ -1,4 +1,7 @@
+import { HttpError } from '@api/utils/HTTPError'
+import { HttpStatus } from '@api/utils/HTTPStatus'
 import { isProduction } from '@api/utils/isProduction'
+import { validate, ValidationError } from 'class-validator'
 import { Router } from 'express'
 import { AuthDto } from './auth.dto'
 import AuthService from './auth.service'
@@ -19,23 +22,37 @@ authRouter.post('/signup', async (req, res, next) => {
 
 authRouter.post('/login', async (req, res, next) => {
   try {
+    const test = new AuthDto()
+    test.username = req.body.username
+    test.password = req.body.password
+
+    const errors = await validate(test)
+
+    if (errors.length > 0) {
+      const dtoErrors = errors.map((error: ValidationError) => ({
+        field: error.property,
+        error: (Object as any).values(error.constraints).join('. '),
+      }))
+      throw { message: dtoErrors, status: HttpStatus.BAD_REQUEST, error: new Error() }
+    }
+
     const user: AuthDto = req.body
     const tokens = await AuthService.login(user)
 
     res.cookie('refresh_token', tokens.refreshToken, {
-      secure: true,
+      //secure: true,
       maxAge: REFRESH_TOKEN_EXP,
       sameSite: 'none',
-      domain: isProduction ? 'DOMAIN' : undefined,
-      httpOnly: true,
+      domain: isProduction ? 'DOMAIN' : 'localhost',
+      //httpOnly: true,
     })
 
     res.cookie('access_token', tokens.accessToken, {
-      secure: true,
+      //secure: true,
       maxAge: ACCESS_TOKEN_EXP,
       sameSite: 'none',
-      domain: isProduction ? 'DOMAIN' : undefined,
-      httpOnly: true,
+      domain: isProduction ? 'DOMAIN' : 'localhost',
+      //httpOnly: true,
     })
 
     return res.status(200).send({ tokens })

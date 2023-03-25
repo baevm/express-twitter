@@ -8,7 +8,7 @@ import { authRouter } from '@api/auth/auth.routes'
 const indexRouter = Router()
 
 indexRouter.use('/auth', authRouter)
-indexRouter.use('/follow', followRouter)
+indexRouter.use('/friendships', followRouter)
 indexRouter.use('/timeline', timelineRouter)
 indexRouter.use('/tweet', tweetRouter)
 indexRouter.use('/user', userRouter)

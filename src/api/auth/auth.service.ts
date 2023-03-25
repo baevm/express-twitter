@@ -1,11 +1,10 @@
 import { AuthDto } from '@api/auth/auth.dto'
+import prisma from '@api/prisma/prisma.service'
 import userService from '@api/user/user.service'
 import { HttpError } from '@api/utils/HTTPError'
 import { HttpStatus } from '@api/utils/HTTPStatus'
-import jwt from 'jsonwebtoken'
 import argon2 from 'argon2'
-import prisma from '@api/prisma/prisma.service'
-import { Response } from 'express'
+import jwt from 'jsonwebtoken'
 
 const login = async (userData: AuthDto) => {
   const isExistUser = await userService.findUserByUsername(userData.username)

@@ -9,5 +9,26 @@ services:
       POSTGRES_PASSWORD: 123456
       POSTGRES_DB: express-twitter-db
     ports:
-      - 5432:5432
+      - "5432:5432"
+    networks:
+      - postgres
     restart: unless-stopped
+
+  api:
+    container_name: express_twitter
+    build:
+        context: .
+        dockerfile: Dockerfile
+    environment:
+        - DATABASE_URL=postgres://postgres:123456@postgres:5432/express-twitter-db
+    ports:
+        - "5000:5000"
+    networks:
+        - postgres
+    depends_on:
+        - postgres
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
